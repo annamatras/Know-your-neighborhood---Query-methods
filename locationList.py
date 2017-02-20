@@ -5,13 +5,13 @@ class LocationList:
     """Create class container for locations objects"""
     locations = []
 
-    @staticmethod
-    def get_voivodeship():
+    @classmethod
+    def get_voivodeship(cls):
         """Create voivodeship object"""
         return LocationList.locations[0].name
 
-    @staticmethod
-    def add_location(data):
+    @classmethod
+    def add_location(cls, data):
         """Method add location object to locations list
         return:
                list of location objects
@@ -20,8 +20,8 @@ class LocationList:
             location = Location(item[0], item[1], item[2], item[3], item[4], item[5])
             LocationList.locations.append(location)
 
-    @staticmethod
-    def list_statistics():
+    @classmethod
+    def list_statistics(cls):
         """Method count objects by types and returns list
         return:
                list of all statistics
@@ -39,8 +39,8 @@ class LocationList:
             stats_listed.append([str(value), key])
         return stats_listed
 
-    @staticmethod
-    def display_three_cities_with_longest_names():
+    @classmethod
+    def display_three_cities_with_longest_names(cls):
         """Method count lenght of cities names and find longest
         return:
                list of cities with longest names
@@ -52,12 +52,10 @@ class LocationList:
                 cities.append(item.name)
         cities = sorted(cities, key=lambda x: len(x), reverse=True)
         three_cities.append([cities[0], [cities[1]], [cities[2]]])
-        # three_cities.append([cities[1]])
-        # three_cities.append([cities[2]])
         return three_cities
 
-    @staticmethod
-    def display_county_name_with_most_communes():
+    @classmethod
+    def display_county_name_with_most_communes(cls):
         """Method count county with most types of communes
         return:
                list of county
@@ -84,8 +82,8 @@ class LocationList:
         county_and_commune_amount[0] = county_and_commune_amount[0][0], str(county_and_commune_amount[0][1])
         return [county_and_commune_amount[0]]
 
-    @staticmethod
-    def display_locations_within_more_than_one_category():
+    @classmethod
+    def display_locations_within_more_than_one_category(cls):
         """Method count locations with more then one type
         return:
                list of locations
@@ -111,8 +109,8 @@ class LocationList:
             n += 1
         return to_display_in_table
 
-    @staticmethod
-    def advanced_search():
+    @classmethod
+    def advanced_search(cls):
         """Method allows user searching list by phrase
         return:
                list of location with searching phrase
