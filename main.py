@@ -1,4 +1,5 @@
 from ui import *
+from location import Location
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
         display_menu()
         number = get_input("Choose number: ")
         if number == "1":
-            print_table(Location.list_statistics(), ["", Location.get_province()])
+            print_table(Location.list_statistics(), ["", Location.get_voivodeship()])
         elif number == "2":
             print_table(Location.display_three_cities_with_longest_names(), ["3 CITIES WITH LONGEST NAMES "])
         elif number == "3":
@@ -19,7 +20,8 @@ def main():
         elif number == "5":
             print_table(Location.advanced_search(), ["LOCATION", "TYPE "])
         elif number == "0":
-            printing("Thank you for using our program. See you back soon.")
+            printing("Bye bye!")
+            sys.exit()
         else:
             printing("Please choose a number from menu.")
 

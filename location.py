@@ -1,10 +1,9 @@
-from ui import *
-
 
 class Location:
     locations = []
 
     def __init__(self, voivodeship, county, commune, commune_type, name, types):
+        """Class creates location objects"""
         self.voivodeship = voivodeship
         self.county = county
         self.commune = commune
@@ -13,27 +12,26 @@ class Location:
         self.type = types
 
     @staticmethod
-    def get_province():
+    def get_voivodeship():
+        """Create voivodeship object"""
         return Location.locations[0].name
 
     @staticmethod
     def add_location(data):
+        """Method add location object to locations list
+        return:
+               list of location objects
+        """
         for item in data:
             location = Location(item[0], item[1], item[2], item[3], item[4], item[5])
             Location.locations.append(location)
 
     @staticmethod
-    def read_from_csv(file):
-        import csv
-        with open(file) as f:
-            next(f)
-            data = []
-            for line in csv.reader(f, delimiter='\t'):
-                data.append(list(line))
-        return data
-
-    @staticmethod
     def list_statistics():
+        """Method count objects by types and returns list
+        return:
+               list of all statistics
+        """
         statistics = {}
         stats_listed = []
         for item in Location.locations:
@@ -49,19 +47,27 @@ class Location:
 
     @staticmethod
     def display_three_cities_with_longest_names():
+        """Method count lenght of cities names and find longest
+        return:
+               list of cities with longest names
+        """
         cities = []
         three_cities = []
         for item in Location.locations:
             if item.commune_type == "4":
                 cities.append(item.name)
         cities = sorted(cities, key=lambda x: len(x), reverse=True)
-        three_cities.append([cities[0]])
-        three_cities.append([cities[1]])
-        three_cities.append([cities[2]])
+        three_cities.append([cities[0], [cities[1]], [cities[2]]])
+        # three_cities.append([cities[1]])
+        # three_cities.append([cities[2]])
         return three_cities
 
     @staticmethod
     def display_county_name_with_most_communes():
+        """Method count county with most types of communes
+        return:
+               list of county
+        """
         counties = []
         for item in Location.locations:
             if item.commune == "" and not item.county == "":
@@ -86,6 +92,10 @@ class Location:
 
     @staticmethod
     def display_locations_within_more_than_one_category():
+        """Method count locations with more then one type
+        return:
+               list of locations
+        """
         name_and_commune = []
         for item in Location.locations:
             name_and_commune.append([item.name, item.commune])
@@ -109,15 +119,19 @@ class Location:
 
     @staticmethod
     def advanced_search():
-        search_effect = []
+        """Method allows user searching list by phrase
+        return:
+               list of location with searching phrase
+        """
+        search_list = []
         search = input("Name location: ")
         search = search.lower()
         for item in Location.locations:
             if search in item.name:
-                search_effect.append([item.name, item.typ])
+                search_list.append([item.name, item.type])
             elif search.title() in item.name:
-                search_effect.append([item.name, item.typ])
-        search_effect = sorted(search_effect, key=lambda x: x[0].lower())
-        return search_effect
+                search_list.append([item.name, item.type])
+        search_list = sorted(search_list, key=lambda x: x[0].lower())
+        return search_list
 
 
