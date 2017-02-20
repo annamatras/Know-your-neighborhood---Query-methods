@@ -1,4 +1,4 @@
-from location import Location
+from locationList import LocationList
 import sys
 import csv
 
@@ -22,7 +22,7 @@ def file_from_user():
         file = get_input("Please enter name of the file to get data from. For exit press 0: ")
         if file == "0":
             sys.exit()
-        Location.add_location(read_from_csv(file))
+        LocationList.add_location(read_from_csv(file))
     except FileNotFoundError:
         print("\nThis file wasn't found. Try again or press 0 to exit.\n")
         file_from_user()

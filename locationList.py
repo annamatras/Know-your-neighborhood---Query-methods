@@ -2,12 +2,13 @@ from location import Location
 
 
 class LocationList:
+    """Create class container for locations objects"""
     locations = []
 
     @staticmethod
     def get_voivodeship():
         """Create voivodeship object"""
-        return Location.locations[0].name
+        return LocationList.locations[0].name
 
     @staticmethod
     def add_location(data):
@@ -17,7 +18,7 @@ class LocationList:
         """
         for item in data:
             location = Location(item[0], item[1], item[2], item[3], item[4], item[5])
-            Location.locations.append(location)
+            LocationList.locations.append(location)
 
     @staticmethod
     def list_statistics():
@@ -27,7 +28,7 @@ class LocationList:
         """
         statistics = {}
         stats_listed = []
-        for item in Location.locations:
+        for item in LocationList.locations:
             if item.type not in statistics:
                 statistics[item.type] = 1
             else:
@@ -46,7 +47,7 @@ class LocationList:
         """
         cities = []
         three_cities = []
-        for item in Location.locations:
+        for item in LocationList.locations:
             if item.commune_type == "4":
                 cities.append(item.name)
         cities = sorted(cities, key=lambda x: len(x), reverse=True)
@@ -62,13 +63,13 @@ class LocationList:
                list of county
         """
         counties = []
-        for item in Location.locations:
+        for item in LocationList.locations:
             if item.commune == "" and not item.county == "":
                 counties.append(item)
         amount = [-1] * len(counties)
         n = 0
         for county in counties:
-            for item in Location.locations:
+            for item in LocationList.locations:
                 if item.county == county.county and (item.commune_type == "1" or item.commune_type == "2"
                                                      or item.commune_type == "3" or item.commune_type == "4"
                                                      or item.commune_type == "5"):
@@ -90,7 +91,7 @@ class LocationList:
                list of locations
         """
         name_and_commune = []
-        for item in Location.locations:
+        for item in LocationList.locations:
             name_and_commune.append([item.name, item.commune])
         every = []
         repeating = []
@@ -119,7 +120,7 @@ class LocationList:
         search_list = []
         search = input("Name location: ")
         search = search.lower()
-        for item in Location.locations:
+        for item in LocationList.locations:
             if search in item.name:
                 search_list.append([item.name, item.type])
             elif search.title() in item.name:
